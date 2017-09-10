@@ -26,5 +26,11 @@ namespace Chess.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Play()
+        {
+            var a = 1;
+            return View();
+        }
     }
 }

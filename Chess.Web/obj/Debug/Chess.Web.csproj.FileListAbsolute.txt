@@ -100,5 +100,9 @@ E:\Programing\SVN\TheNextChess\Chess.Web\bin\Microsoft.AI.Web.xml
 E:\Programing\SVN\TheNextChess\Chess.Web\obj\Debug\Chess.Web.csprojResolveAssemblyReference.cache
 E:\Programing\SVN\TheNextChess\Chess.Web\obj\Debug\Chess.Web.dll
 E:\Programing\SVN\TheNextChess\Chess.Web\obj\Debug\Chess.Web.pdb
-E:\Programing\SVN\TheNextChess\Chess.Web\obj\Debug\Chess.Web.Migrations.abc.resources
-E:\Programing\SVN\TheNextChess\Chess.Web\obj\Debug\Chess.Web.csproj.GenerateResource.Cache
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Data.dll
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Models.dll
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Data.pdb
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Data.dll.config
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Models.pdb
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Models.dll.config
