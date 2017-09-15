@@ -1,4 +1,5 @@
-﻿using Chess.Game.Players;
+﻿using Chess.Game.Chessboard.Contracts;
+using Chess.Game.Players;
 using Chess.Game.Players.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace Chess.Game.GameEngine.Contracts
     {
         IEnumerable<IPlayer> Players { get; }
 
-        void Initialize(IGameInitializationStrategy strategy);
+        IChessboard GetBoard { get; }
+
+        void Initialize(IGameInitializationStrategy strategy, string firstPlayerName, string secontPlayerName);
 
         void Start();
 

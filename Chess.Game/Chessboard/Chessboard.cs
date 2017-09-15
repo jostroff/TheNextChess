@@ -22,6 +22,8 @@
 
         public int Cols { get; private set; }
 
+        public IFigure[,] GetBoard { get { return this.chessboard; } }
+
         public void AddFigure(IFigure figure, Position position)
         {
             ObjectValidator.CheckIfObjectIsValid(figure, NullFigureMessage);

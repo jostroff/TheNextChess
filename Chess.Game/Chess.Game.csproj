@@ -58,6 +58,10 @@
     <Compile Include="GameEngine\TwoPlyersEngine.cs" />
     <Compile Include="Globals\Constants.cs" />
     <Compile Include="Globals\Validators\ObjectValidator.cs" />
+    <Compile Include="InputProviders\Contracts\IInputProvider.cs" />
+    <Compile Include="InputProviders\InputProvider.cs" />
+    <Compile Include="OutputProviders\Contracts\IOutputProvider.cs" />
+    <Compile Include="OutputProviders\WebOutputProvider.cs" />
     <Compile Include="Players\Contracts\IPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

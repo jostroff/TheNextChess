@@ -1,0 +1,55 @@
+﻿@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<input id="text" type="text" />
+<button>Send</button>
+<table></table>
+
+<script>
+
+
+
+    $(function () {
+
+        $.connection.hub.start();
+
+        let game = $.connection.game;
+
+        $('button').on('click', send);
+
+        function send() {
+            let text = $('#text').val();
+            console.log(text);
+
+            game.server.sendMessage(text);
+        }
+
+        game.client.addMessage = function (msg) {
+            $('table').append($('<h3>').text(msg));
+        }
+
+
+
+        let data;
+
+        $.ajax({
+
+            url: '@Url.Action("GetBoard", "Game")',
+            context: document.body
+        }).done(function(serverdata) {
+            data = serverdata;
+
+            console.log(data);
+
+        });
+    });
+
+</script>

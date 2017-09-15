@@ -10,5 +10,7 @@ namespace Chess.Game.Figures.Contracts
     public interface IFigure
     {
         ChessColor Color {get;}
+
+        string Name { get; }
     }
 }

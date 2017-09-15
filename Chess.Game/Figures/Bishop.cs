@@ -9,6 +9,7 @@
     {
         public Bishop(ChessColor color) : base(color)
         {
+
         }
     }
 }

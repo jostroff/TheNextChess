@@ -106,3 +106,9 @@ E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Data.pdb
 E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Data.dll.config
 E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Models.pdb
 E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Models.dll.config
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Game.dll
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Chess.Game.pdb
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\Programing\SVN\TheNextChess\Chess.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

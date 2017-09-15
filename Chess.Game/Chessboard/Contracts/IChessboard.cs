@@ -13,6 +13,7 @@ namespace Chess.Game.Chessboard.Contracts
         int Rows { get; }
 
         int Cols { get; }
+        IFigure[,] GetBoard { get; }
 
         void AddFigure(IFigure figure, Position position);
 
