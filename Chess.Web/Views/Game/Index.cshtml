@@ -8,7 +8,14 @@
 }
 
 <h2>Index</h2>
+<div>
+    <ul id="online-users">
 
+    </ul>
+</div>
+<div>
+    <h2 id="invitation"></h2>
+</div>
 <input id="text" type="text" />
 <button>Send</button>
 <table></table>
@@ -21,24 +28,50 @@
 
         $.connection.hub.start();
 
+        let data;
+
         let game = $.connection.game;
 
-        $('button').on('click', send);
+        $('button').on('click', storeUser);
 
-        function send() {
-            let text = $('#text').val();
-            console.log(text);
+        function storeUser() {
+            
+            game.server.storeUser();
 
-            game.server.sendMessage(text);
         }
 
-        game.client.addMessage = function (msg) {
+        function listUsers(users) {
+            console.log(users);
+            let ul = $('#online-users').empty();
+
+            for (let user of users) {
+                let listItem = $('<li>').text(user);
+                listItem.on('click', function () {
+                    game.server.invite(listItem.text());
+                })
+                ul.append(listItem);
+            }
+        }
+
+        function removeUser(user) {
+            $(`li:contains(${user})`).remove();
+        }
+
+        function recieveInvitation(host) {
+            $('#invitation').attr('data-conn-id', host.ConnectionId).text(`invitation from ${host.Username}`);
+        }
+
+        game.client.recieveInvitation = recieveInvitation;
+        game.client.removeUser = removeUser;
+        game.client.addMessage = addMessage;
+        game.client.listUsers = listUsers;
+
+        function addMessage(msg) {
             $('table').append($('<h3>').text(msg));
         }
 
 
 
-        let data;
 
         $.ajax({
 
