@@ -75,12 +75,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\User.cs" />
+    <Compile Include="HubModels\GameHub.cs" />
     <Compile Include="HubModels\UserHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chess.Game\Chess.Game.csproj">
+      <Project>{DA94D123-ABC0-47DC-813B-B1D2201C8E00}</Project>
+      <Name>Chess.Game</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

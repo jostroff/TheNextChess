@@ -25,3 +25,5 @@ E:\Programing\SVN\TheNextChess\Chess.Models\bin\Debug\Newtonsoft.Json.xml
 E:\Programing\SVN\TheNextChess\Chess.Models\obj\Debug\Chess.Models.csprojResolveAssemblyReference.cache
 E:\Programing\SVN\TheNextChess\Chess.Models\obj\Debug\Chess.Models.dll
 E:\Programing\SVN\TheNextChess\Chess.Models\obj\Debug\Chess.Models.pdb
+E:\Programing\SVN\TheNextChess\Chess.Models\bin\Debug\Chess.Game.dll
+E:\Programing\SVN\TheNextChess\Chess.Models\bin\Debug\Chess.Game.pdb

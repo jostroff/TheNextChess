@@ -220,8 +220,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\pawn-black.png" />
-    <Content Include="Content\Images\pawn-white.png" />
+    <Content Include="Content\Images\Pawn-black.png" />
+    <Content Include="Content\Images\Pawn-white.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

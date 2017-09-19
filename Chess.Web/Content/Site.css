@@ -36,3 +36,16 @@ td {
 img {
     width: 100%;
 }
+
+li {
+    list-style-type: none;
+}
+
+.online-user {
+    margin: 5px;
+    padding: 5px;
+    background-color: cadetblue;
+    border-radius: 2px;
+    display: inline-block;
+    width: 12%;
+}

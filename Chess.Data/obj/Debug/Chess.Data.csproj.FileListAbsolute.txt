@@ -33,3 +33,5 @@ E:\Programing\SVN\TheNextChess\Chess.Data\obj\Debug\Chess.Data.dll
 E:\Programing\SVN\TheNextChess\Chess.Data\obj\Debug\Chess.Data.pdb
 E:\Programing\SVN\TheNextChess\Chess.Data\obj\Debug\Chess.Data.Migrations.abcde.resources
 E:\Programing\SVN\TheNextChess\Chess.Data\obj\Debug\Chess.Data.csproj.GenerateResource.Cache
+E:\Programing\SVN\TheNextChess\Chess.Data\bin\Debug\Chess.Game.dll
+E:\Programing\SVN\TheNextChess\Chess.Data\bin\Debug\Chess.Game.pdb

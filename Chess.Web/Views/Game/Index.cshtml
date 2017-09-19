@@ -4,21 +4,31 @@
 }
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "TheNextChess";
 }
 
-<h2>Index</h2>
 <div>
+    <h2>Online users:</h2>
     <ul id="online-users">
 
     </ul>
 </div>
-<div>
+<div id="messages-wrapper">
+    <ul id="messages">
+
+    </ul>
+</div>
+<div id="invit_wrapper" style="display: none">
     <h2 id="invitation"></h2>
 </div>
-<input id="text" type="text" />
-<button>Send</button>
-<table></table>
+<div id="message-box" style="display: none">
+    <input id="text" type="text" />
+    <button>Send Message</button>
+</div>
+
+<table id="board">
+
+</table>
 
 <script>
 
@@ -32,23 +42,35 @@
 
         let game = $.connection.game;
 
-        $('button').on('click', storeUser);
+        $('#message-box button').on('click', sendMessageToOponent);
 
-        function storeUser() {
-            
-            game.server.storeUser();
+        function sendMessageToOponent() {
+            let message = $('#text');
+            let oponentId = sessionStorage.getItem('oponentId');
+            game.server.sendMessageToOponent(message.val(), oponentId);
+            let listItem = $('<li>').text(`Me: ${message.val()}`);
+            $('#messages').append(listItem);
+            message.val('');
 
         }
 
-        function listUsers(users) {
-            console.log(users);
-            let ul = $('#online-users').empty();
+        function recieveMessage(message, sender) {
+            let myUsername = sessionStorage.getItem('username');
+            let listItem = $('<li>').text(`${sender}: ${message}`);
+            $('#messages').append(listItem);
+        }
 
+        function listUsers(users) {
+            let ul = $('#online-users').empty();
+            users = users.filter(x => x !== sessionStorage.getItem('username'));
             for (let user of users) {
-                let listItem = $('<li>').text(user);
-                listItem.on('click', function () {
-                    game.server.invite(listItem.text());
-                })
+                let listItem = $('<li>');
+                let username = $('<p>').addClass('online-user').text(user);
+                let inviteButton = $('<button>').text('Invite').on('click', function () {
+                    game.server.invite(user);
+                });
+
+                listItem.append(username, inviteButton);
                 ul.append(listItem);
             }
         }
@@ -58,31 +80,93 @@
         }
 
         function recieveInvitation(host) {
-            $('#invitation').attr('data-conn-id', host.ConnectionId).text(`invitation from ${host.Username}`);
+            let invitation = $('#invitation').attr('data-conn-id', host.ConnectionId).text(`Invitation from ${host.Username}`);
+
+            let button = $('<button>').text('Confirm').on('click', function () {
+                sendConfirmation(invitation.attr('data-conn-id'));
+            });
+
+            $('#invit_wrapper').append(button);
+            $('#invit_wrapper').show();
+
         }
 
+        function sendConfirmation(hostId) {
+            sessionStorage.setItem('oponentId', hostId);
+            game.server.sendConfirmation(hostId);
+        }
+
+        function recieveConfirmation(user) {
+            sessionStorage.setItem('oponentId', user.ConnectionId);
+            let invitation = $('#invitation').attr('data-conn-id', user.ConnectionId).text(`Invitation confirmed from ${user.Username}`);
+            $('#invit_wrapper').show();
+        }
+
+        function getMyUsername(username) {
+            sessionStorage.setItem('username', username);
+        }
+
+        function hideInvitation() {
+            $('#invit_wrapper').hide();
+        }
+
+        function startGame(board) {
+            draw(board);
+            showMessageBox();
+            hideInvitation();
+        }
+
+        game.client.recieveMessage = recieveMessage;
+        game.client.getMyUsername = getMyUsername;
+        game.client.recieveConfirmation = recieveConfirmation;
+        game.client.startGame = startGame;
+        game.client.sendConfirmation = sendConfirmation;
         game.client.recieveInvitation = recieveInvitation;
         game.client.removeUser = removeUser;
-        game.client.addMessage = addMessage;
         game.client.listUsers = listUsers;
 
-        function addMessage(msg) {
-            $('table').append($('<h3>').text(msg));
-        }
-
-
-
-
-        $.ajax({
-
-            url: '@Url.Action("GetBoard", "Game")',
-            context: document.body
-        }).done(function(serverdata) {
-            data = serverdata;
-
-            console.log(data);
-
-        });
     });
+
+    function showMessageBox() {
+        $('#message-box').show();
+    }
+    //TODO: Replace to drawer.js
+    function draw(board) {
+        for (var i = 0; i < board.length; i++) {
+            let row = $('<tr>');
+            for (var j = 0; j < board[i].length; j++) {
+
+
+                let td = $('<td>').attr('id', `${i}-${j}`);
+
+                if (j % 2 == 0) {
+                    if (i % 2 == 0) {
+                        td.css('background-color', '#F1F1F1');
+                    } else {
+                        td.css('background-color', 'brown');
+                    }
+                }
+                else {
+                    if (i % 2 != 0) {
+                        td.css('background-color', '#F1F1F1');
+                    } else {
+                        td.css('background-color', 'brown');
+                    }
+                }
+
+                if (board[i][j] !== null) {
+
+                    var color = board[i][j].Color == 0 ? "white" : "black";
+
+                    let img = $(`<img src="../../Content/Images/${board[i][j].Name}-${color}.png" />`);
+                    img.attr('id', `w-pawn-${j}`);
+                    td.append(img);
+                }
+
+                row.append(td);
+            }
+            $('table#board').append(row);
+        }
+    }
 
 </script>
