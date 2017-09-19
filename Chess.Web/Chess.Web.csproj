@@ -220,8 +220,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Bishop-black.png" />
+    <Content Include="Content\Images\Bishop-white.png" />
+    <Content Include="Content\Images\King-black.png" />
+    <Content Include="Content\Images\King-white.png" />
+    <Content Include="Content\Images\Knight-black.png" />
+    <Content Include="Content\Images\Knight-white.png" />
     <Content Include="Content\Images\Pawn-black.png" />
     <Content Include="Content\Images\Pawn-white.png" />
+    <Content Include="Content\Images\Queen-black.png" />
+    <Content Include="Content\Images\Queen-white.png" />
+    <Content Include="Content\Images\Rook-black.png" />
+    <Content Include="Content\Images\Rook-white.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
