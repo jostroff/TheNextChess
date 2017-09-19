@@ -132,36 +132,48 @@
     }
     //TODO: Replace to drawer.js
     function draw(board) {
-        for (var i = 0; i < board.length; i++) {
+        for (var i = -1; i < board.length + 1; i++) {
             let row = $('<tr>');
-            for (var j = 0; j < board[i].length; j++) {
-
-
-                let td = $('<td>').attr('id', `${i}-${j}`);
-
-                if (j % 2 == 0) {
-                    if (i % 2 == 0) {
-                        td.css('background-color', '#F1F1F1');
-                    } else {
-                        td.css('background-color', 'brown');
+            for (var j = -1; j < 9; j++) {
+                let td = $('<td>').css('background-color', 'grey');
+                if (i === -1 || i === board.length) {
+                    if (j !== -1 && j !== 8) {
+                        
+                        td.text(`${String.fromCharCode('A'.charCodeAt(0) + j)}`)
                     }
-                }
-                else {
-                    if (i % 2 != 0) {
-                        td.css('background-color', '#F1F1F1');
-                    } else {
-                        td.css('background-color', 'brown');
+                } else if (j === -1 || j === 8) {
+                    td.text(8 - i);
+                } else {
+
+                    td.attr('id', `${i}-${j}`);
+
+                    if (j % 2 == 0) {
+                        if (i % 2 == 0) {
+                            td.css('background-color', '#F1F1F1');
+                        } else {
+                            td.css('background-color', 'brown');
+                        }
                     }
+                    else {
+                        if (i % 2 != 0) {
+                            td.css('background-color', '#F1F1F1');
+                        } else {
+                            td.css('background-color', 'brown');
+                        }
+                    }
+
+                    if (board[i][j] !== null && board[i][j] !== undefined) {
+
+                        var color = board[i][j].Color == 0 ? "white" : "black";
+
+                        let img = $(`<img src="../../Content/Images/${board[i][j].Name}-${color}.png" />`);
+                        img.attr('id', `w-pawn-${j}`);
+                        td.append(img);
+                    }
+
                 }
 
-                if (board[i][j] !== null) {
 
-                    var color = board[i][j].Color == 0 ? "white" : "black";
-
-                    let img = $(`<img src="../../Content/Images/${board[i][j].Name}-${color}.png" />`);
-                    img.attr('id', `w-pawn-${j}`);
-                    td.append(img);
-                }
 
                 row.append(td);
             }
