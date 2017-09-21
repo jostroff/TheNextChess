@@ -44,6 +44,8 @@
     <Compile Include="Chessboard\Contracts\IChessboard.cs" />
     <Compile Include="Commons\ChessColor.cs" />
     <Compile Include="Commons\Position.cs" />
+    <Compile Include="Controllers\Contracts\IController.cs" />
+    <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Figures\Abstracts\Figure.cs" />
     <Compile Include="Figures\Bishop.cs" />
     <Compile Include="Figures\Contracts\IFigure.cs" />

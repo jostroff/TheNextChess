@@ -15,6 +15,7 @@ using Chess.Game.GameEngine.Initializators;
 using Chess.Game.OutputProviders.Contracts;
 using Chess.Game.OutputProviders;
 using Newtonsoft.Json;
+using Chess.Game.Commons;
 
 namespace Chess.Web.Hubs
 {
@@ -51,20 +52,39 @@ namespace Chess.Web.Hubs
             IOutputProvider outputProvider = new WebOutputProvider();
 
             Guid gameId = Guid.NewGuid();
-            var players = new HashSet<UserHub>() { host, guest };
-            var game = new GameHub
-            {
-                GameId = gameId,
-                GameEngine = engine,
-                Players = players
-            };
+            var players = new List<UserHub>() { host, guest };
+            var game = new GameHub(players, engine);
 
             Games.Add(game);
 
             var board = outputProvider.GetBoardToRender(engine);
-
+            var nextPlayerName = players.FirstOrDefault(p => p.ConnectionId == game.NextPlayerId).Username;
             Clients.Client(host.ConnectionId).startGame(board);
             Clients.Client(guest.ConnectionId).startGame(board);
+            Clients.Client(host.ConnectionId).recieveMessage($"Next player: {nextPlayerName}", "Judge");
+            Clients.Client(guest.ConnectionId).recieveMessage($"Next player: {nextPlayerName}", "Judge");
+
+        }
+
+        public void MakeMove(Position from, Position to)
+        {
+            var game = Games.FirstOrDefault(x => x.Players.Any(p => p.ConnectionId == Context.ConnectionId));
+            try
+            {
+                game.MakeMove(Context.ConnectionId, from, to);
+                var nextPlayer = game.Players.FirstOrDefault(p => p.ConnectionId == game.NextPlayerId);
+
+                var board = game.GetBoard();
+                Clients.Client(Context.ConnectionId).drawBoard(board);
+                Clients.Client(nextPlayer.ConnectionId).drawBoard(board);
+                Clients.Client(Context.ConnectionId).recieveMessage($"Next player: {nextPlayer.Username}", "Judge");
+                Clients.Client(nextPlayer.ConnectionId).recieveMessage($"Next player: {nextPlayer.Username}", "Judge");
+            }
+            catch (Exception ex)
+            {
+                Clients.Client(Context.ConnectionId).recieveMessage(ex.Message, "Judge");
+            }
+
 
         }
 

@@ -15,12 +15,12 @@
 
         public static void CheckIfPositionIsValid(Position position, string errorMessage)
         {
-            if (position.Row < 1 || position.Row > 8)
+            if (position.Row < 0 || position.Row > 7)
             {
                 throw new IndexOutOfRangeException(errorMessage);
             }
 
-            if (position.Col < 'a' || position.Col > 'h')
+            if (position.Col < 0 || position.Col > 7)
             {
                 throw new IndexOutOfRangeException(errorMessage);
             }

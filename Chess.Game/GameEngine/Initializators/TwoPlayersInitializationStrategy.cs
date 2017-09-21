@@ -28,11 +28,11 @@
             var firstPlayer = players[0];
             var secondPlayer = players[1];
 
-            this.AddSpecialFigures(firstPlayer, board, 8);
-            this.AddPawns(firstPlayer, board, 7);
+            this.AddSpecialFigures(firstPlayer, board, 7);
+            this.AddPawns(firstPlayer, board, 6);
 
-            this.AddSpecialFigures(secondPlayer, board, 1);
-            this.AddPawns(secondPlayer, board, 2);
+            this.AddSpecialFigures(secondPlayer, board, 0);
+            this.AddPawns(secondPlayer, board, 1);
 
         }
 
@@ -42,7 +42,7 @@
             {
                 var figure = (IFigure)Activator.CreateInstance(figureTypes[i], player.Color);
                 player.AddFigure(figure);
-                var position = new Position(row, (char)(i + 'a'));
+                var position = new Position(row, i);
                 board.AddFigure(figure, position);
             }
         }
@@ -53,7 +53,7 @@
             {
                 var pawn = new Pawn(player.Color);
                 player.AddFigure(pawn);
-                var position = new Position(row, (char)(i + 'a'));
+                var position = new Position(row, i);
                 board.AddFigure(pawn, position);
             }
         }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chess.Game.Commons;
 
 namespace Chess.Game.GameEngine.Contracts
 {
@@ -20,5 +21,6 @@ namespace Chess.Game.GameEngine.Contracts
         void Start();
 
         void WinningCondition();
+        void Play(string username, Position from, Position to);
     }
 }

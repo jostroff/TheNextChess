@@ -10,8 +10,13 @@
             this.Row = row;
         }
 
-        public int Col { get; private set; }
+        public Position()
+        {
 
-        public int Row { get; private set; }
+        }
+
+        public int Col { get; set; }
+
+        public int Row { get; set; }
     }
 }

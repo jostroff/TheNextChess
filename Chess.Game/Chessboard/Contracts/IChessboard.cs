@@ -17,6 +17,6 @@ namespace Chess.Game.Chessboard.Contracts
 
         void AddFigure(IFigure figure, Position position);
 
-        void RemoveFigure(Position position);
+        IFigure RemoveFigure(Position position);
     }
 }

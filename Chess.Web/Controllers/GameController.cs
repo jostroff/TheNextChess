@@ -15,24 +15,7 @@ namespace Chess.Web.Controllers
         // GET: Game
         public ActionResult Index()
         {
-
-
             return View();
         }
-
-        public JsonResult GetBoard()
-        {
-            var inputProvider = new InputProvider();
-
-            var engine = new TwoPlyersEngine(inputProvider);
-            var strategy = new TwoPlayersInitializationStrategy();
-            engine.Initialize(strategy, "Ivan", "Dragan");
-            var outputProvider = new WebOutputProvider();
-
-            var boardToRender = outputProvider.GetBoardToRender(engine);
-
-            return Json(boardToRender, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

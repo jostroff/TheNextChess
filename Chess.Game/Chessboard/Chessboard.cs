@@ -28,30 +28,22 @@
         {
             ObjectValidator.CheckIfObjectIsValid(figure, NullFigureMessage);
             ObjectValidator.CheckIfPositionIsValid(position, InvalidPositionMessage);
-            int arrRow = this.GetArrayRow(position.Row);
-            int arrCol = this.GetArrayCol(position.Col);
+            int arrRow = position.Row;
+            int arrCol = position.Col;
             this.chessboard[arrRow, arrCol] = figure;
 
         }
 
-        public void RemoveFigure(Position position)
+        public IFigure RemoveFigure(Position position)
         {
             ObjectValidator.CheckIfPositionIsValid(position, InvalidPositionMessage);
 
-            int arrRow = this.GetArrayRow(position.Row);
-            int arrCol = this.GetArrayCol(position.Col);
+            int arrRow = position.Row;
+            int arrCol = position.Col;
+            var figure = this.chessboard[arrRow, arrCol];
             this.chessboard[arrRow, arrCol] = null;
+            return figure;
 
-        }
-
-        private int GetArrayRow(int row)
-        {
-            return this.Rows - row;
-        }
-
-        private int GetArrayCol(int col)
-        {
-            return col - 'a';
         }
     }
 }

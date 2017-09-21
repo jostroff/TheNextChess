@@ -1,34 +1,34 @@
 ﻿@section Scripts {
     <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
     <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script src="~/Scripts/Chessboard/chessboard-gen.js"></script>
 }
 
 @{
     ViewBag.Title = "TheNextChess";
 }
 
-<div>
+<div id="online-users-wrapper">
     <h2>Online users:</h2>
     <ul id="online-users">
 
     </ul>
 </div>
-<div id="messages-wrapper">
-    <ul id="messages">
 
-    </ul>
-</div>
 <div id="invit_wrapper" style="display: none">
     <h2 id="invitation"></h2>
 </div>
 <div id="message-box" style="display: none">
     <input id="text" type="text" />
     <button>Send Message</button>
+    <div id="messages-wrapper">
+        <ul id="messages"></ul>
+    </div>
+</div>
+<div id="chessboard">
+    <table id="board"></table>
 </div>
 
-<table id="board">
-
-</table>
 
 <script>
 
@@ -43,6 +43,7 @@
         let game = $.connection.game;
 
         $('#message-box button').on('click', sendMessageToOponent);
+        $('#send-command').on('click', makeMove)
 
         function sendMessageToOponent() {
             let message = $('#text');
@@ -116,6 +117,138 @@
             hideInvitation();
         }
 
+        function makeMove() {
+            let from = {
+                Row: $('#row-from').val(),
+                Col: $('#col-from').val()
+            };
+
+            let to = {
+                Row: $('#row-to').val(),
+                Col: $('#col-to').val()
+            };
+
+            game.server.makeMove(from, to);
+        }
+
+        function drawBoard(board) {
+            draw(board);
+        }
+
+        let table = $('table');
+
+        let markedFigure;
+
+        function markElement(e) {
+            let squareToMark;
+
+            if ($(e).is('img')) {
+
+                table.find('img').css('opacity', '1');
+                $(e).css('opacity', '0.5');
+                squareToMark = $(e).parent();
+                console.log(squareToMark);
+            } else {
+                squareToMark = $(e);
+            }
+
+            if (markedFigure === undefined) {
+                markedFigure = squareToMark;
+            } else {
+                sendCommand(squareToMark);
+            }
+
+
+        }
+
+        function sendCommand(e) {
+            console.log(e);
+            if (markedFigure !== undefined) {
+                let markedSquare = $(markedFigure);
+                let toSquare = $(e);
+
+                let from = {
+                    Row: markedSquare.attr('data-row'),
+                    Col: markedSquare.attr('data-col')
+                }
+
+                let to = {
+                    Row: toSquare.attr('data-row'),
+                    Col: toSquare.attr('data-col')
+                }
+
+                game.server.makeMove(from, to);
+
+                unmark();
+            }
+        }
+
+        function unmark() {
+            markedFigure = undefined;
+            table.find('img').css('opacity', '1');
+        }
+
+        //TODO: Replace to drawer.js
+        function draw(board) {
+            let table = $('table#board').empty();
+            for (var i = -1; i < board.length + 1; i++) {
+                let row = $('<tr>');
+                for (var j = -1; j < 9; j++) {
+                    let td = $('<td>').css('background-color', 'grey');
+                    if (i === -1 || i === board.length) {
+                        if (j !== -1 && j !== 8) {
+
+                            td.text(`${String.fromCharCode('A'.charCodeAt(0) + j)}`).addClass('board-hor-element');
+                        }
+                    } else if (j === -1 || j === 8) {
+                        td.text(8 - i).addClass('board-vert-element');
+                    } else {
+
+                        td.attr('data-row', i).attr('data-col', j).on('click', function (e) {
+                            e.stopPropagation();
+                            if (markedFigure === undefined) {
+                                markElement(e.target);
+                            } else {
+                                sendCommand(e.target);
+                            }
+                        });
+
+                        if (j % 2 == 0) {
+                            if (i % 2 == 0) {
+                                td.css('background-color', '#F1F1F1');
+                            } else {
+                                td.css('background-color', 'brown');
+                            }
+                        }
+                        else {
+                            if (i % 2 != 0) {
+                                td.css('background-color', '#F1F1F1');
+                            } else {
+                                td.css('background-color', 'brown');
+                            }
+                        }
+
+                        if (board[i][j] !== null && board[i][j] !== undefined) {
+
+                            var color = board[i][j].Color == 0 ? "white" : "black";
+
+                            let img = $(`<img src="../../Content/Images/${board[i][j].Name}-${color}.png" />`);
+                            img.addClass(color);
+                            td.append(img);
+                        }
+
+                    }
+
+
+
+                    row.append(td);
+                }
+
+                table.append(row);
+            }
+        }
+
+        game.client.drawBoard = drawBoard;
         game.client.recieveMessage = recieveMessage;
         game.client.getMyUsername = getMyUsername;
         game.client.recieveConfirmation = recieveConfirmation;
@@ -130,55 +263,6 @@
     function showMessageBox() {
         $('#message-box').show();
     }
-    //TODO: Replace to drawer.js
-    function draw(board) {
-        for (var i = -1; i < board.length + 1; i++) {
-            let row = $('<tr>');
-            for (var j = -1; j < 9; j++) {
-                let td = $('<td>').css('background-color', 'grey');
-                if (i === -1 || i === board.length) {
-                    if (j !== -1 && j !== 8) {
-                        
-                        td.text(`${String.fromCharCode('A'.charCodeAt(0) + j)}`)
-                    }
-                } else if (j === -1 || j === 8) {
-                    td.text(8 - i);
-                } else {
 
-                    td.attr('id', `${i}-${j}`);
-
-                    if (j % 2 == 0) {
-                        if (i % 2 == 0) {
-                            td.css('background-color', '#F1F1F1');
-                        } else {
-                            td.css('background-color', 'brown');
-                        }
-                    }
-                    else {
-                        if (i % 2 != 0) {
-                            td.css('background-color', '#F1F1F1');
-                        } else {
-                            td.css('background-color', 'brown');
-                        }
-                    }
-
-                    if (board[i][j] !== null && board[i][j] !== undefined) {
-
-                        var color = board[i][j].Color == 0 ? "white" : "black";
-
-                        let img = $(`<img src="../../Content/Images/${board[i][j].Name}-${color}.png" />`);
-                        img.attr('id', `w-pawn-${j}`);
-                        td.append(img);
-                    }
-
-                }
-
-
-
-                row.append(td);
-            }
-            $('table#board').append(row);
-        }
-    }
 
 </script>

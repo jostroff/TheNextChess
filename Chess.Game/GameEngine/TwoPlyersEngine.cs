@@ -7,12 +7,18 @@
     using Chess.Game.InputProviders.Contracts;
     using Chess.Game.Chessboard;
     using Chess.Game.Chessboard.Contracts;
+    using Chess.Game.Commons;
+    using Chess.Game.Controllers.Contracts;
+    using Chess.Game.Controllers;
+    using System.Linq;
+    using Chess.Game.Players;
 
     public class TwoPlyersEngine : IEngine
     {
-        private readonly ICollection<IPlayer> players;
+        private IList<IPlayer> players;
         private readonly IInputProvider input;
         private readonly IChessboard board;
+        private readonly IController controller;
 
         public IEnumerable<IPlayer> Players { get { return new List<IPlayer>(this.players); } }
 
@@ -20,11 +26,12 @@
         {
             this.input = input;
             this.board = new Chessboard();
+            this.controller = new Controller(this.board);
         }
 
         public void Initialize(IGameInitializationStrategy strategy, string firstPlayerName, string secontPlayerName)
         {
-            var players = this.input.GetPlayers(firstPlayerName, secontPlayerName);
+            this.players = this.input.GetPlayers(firstPlayerName, secontPlayerName);
             strategy.Initialize(players, this.board);
         }
 
@@ -38,6 +45,12 @@
         public void WinningCondition()
         {
             throw new NotImplementedException();
+        }
+
+        public void Play(string username, Position from, Position to)
+        {
+            var player = this.players.FirstOrDefault(p => p.Name == username);
+            this.controller.MakeMove(player, from, to);
         }
     }
 }
