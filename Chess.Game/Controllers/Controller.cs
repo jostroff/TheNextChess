@@ -16,10 +16,11 @@
             this.board = board;
         }
 
-        public void MakeMove(IPlayer player , Position from, Position to)
+        public void MakeMove(IPlayer player, Position from, Position to)
         {
             var squareFrom = this.board.GetBoard[from.Row, from.Col];
             var squareTo = this.board.GetBoard[to.Row, to.Col];
+
 
             if (squareFrom == null)
             {
@@ -31,20 +32,18 @@
                 throw new InvalidOperationException($"{player.Color} player cannot move this figure");
             }
 
-            if (squareTo == null)
-            {
-                this.MoveFigure(squareFrom,from, to);
-            }
-            else if (squareTo.Color != player.Color)
-            {
-                this.GetFigure(from, to);
-            }
-
+            this.ValidateMovement(squareFrom, from, to, player.Color);
+            this.MoveFigure(squareFrom, from, to);
         }
 
-        private void GetFigure(Position from, Position to)
+        private void ValidateMovement(IFigure figure, Position from, Position to, ChessColor playerColor)
         {
-            throw new NotImplementedException();
+            var movements = figure.GetMovements;
+
+            foreach (var movement in movements)
+            {
+                movement.Validate(this.board, from, to, playerColor);
+            }
         }
 
         private void MoveFigure(IFigure figure, Position from, Position to)

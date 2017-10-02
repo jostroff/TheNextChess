@@ -1,4 +1,5 @@
 ﻿using Chess.Game.Commons;
+using Chess.Game.Figures.Movements.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Chess.Game.Figures.Contracts
         ChessColor Color {get;}
 
         string Name { get; }
+
+        ICollection<IMovement> GetMovements { get; }
     }
 }

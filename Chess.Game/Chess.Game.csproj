@@ -51,6 +51,9 @@
     <Compile Include="Figures\Contracts\IFigure.cs" />
     <Compile Include="Figures\King.cs" />
     <Compile Include="Figures\Knight.cs" />
+    <Compile Include="Figures\Movements\Abstracts\Movement.cs" />
+    <Compile Include="Figures\Movements\Contracts\IMovement.cs" />
+    <Compile Include="Figures\Movements\PawnVerticalMovement.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="Figures\Rook.cs" />

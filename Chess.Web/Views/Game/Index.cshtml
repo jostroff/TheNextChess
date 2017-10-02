@@ -177,6 +177,9 @@
                     Col: toSquare.attr('data-col')
                 }
 
+                console.log(from);
+                console.log(to);
+
                 game.server.makeMove(from, to);
 
                 unmark();
@@ -205,12 +208,13 @@
                     } else {
 
                         td.attr('data-row', i).attr('data-col', j).on('click', function (e) {
-                            e.stopPropagation();
-                            if (markedFigure === undefined) {
-                                markElement(e.target);
-                            } else {
-                                sendCommand(e.target);
-                            }
+                           // e.stopPropagation();
+                            //if (markedFigure === undefined) {
+                            //    markElement(e.target);
+                            //} else {
+                            //    sendCommand(e.target);
+                            //}
+                            markElement(e.target);
                         });
 
                         if (j % 2 == 0) {

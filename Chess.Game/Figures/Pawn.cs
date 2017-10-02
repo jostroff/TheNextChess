@@ -4,6 +4,9 @@
     using System;
     using Chess.Game.Commons;
     using Chess.Game.Figures.Abstracts;
+    using Chess.Game.Figures.Movements.Contracts;
+    using System.Collections.Generic;
+    using Chess.Game.Figures.Movements;
 
     public class Pawn : Figure, IFigure
     {
