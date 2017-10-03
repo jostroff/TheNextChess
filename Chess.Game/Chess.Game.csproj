@@ -53,7 +53,12 @@
     <Compile Include="Figures\Knight.cs" />
     <Compile Include="Figures\Movements\Abstracts\Movement.cs" />
     <Compile Include="Figures\Movements\Contracts\IMovement.cs" />
+    <Compile Include="Figures\Movements\CrossMovement.cs" />
+    <Compile Include="Figures\Movements\KingMovement.cs" />
+    <Compile Include="Figures\Movements\KnightMovement.cs" />
     <Compile Include="Figures\Movements\PawnVerticalMovement.cs" />
+    <Compile Include="Figures\Movements\QueenMovement.cs" />
+    <Compile Include="Figures\Movements\VAndHMovement.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="Figures\Rook.cs" />

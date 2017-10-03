@@ -39,25 +39,24 @@
             var destinationRow = to.Row;
             var destinationCol = to.Col;
 
-            while (!reachedRow && !reachedCol)
+            while (!reachedRow || !reachedCol)
             {
                 if (remainingRows != 0)
                 {
                     remainingRows = remainingRows > 0 ? remainingRows - 1 : remainingRows + 1;
-
-                    if (remainingRows == 0)
-                    {
-                        reachedRow = true;
-                    }
                 }
                 if (remainingCols != 0)
                 {
                     remainingCols = remainingCols > 0 ? remainingCols - 1 : remainingCols + 1;
+                }
 
-                    if (remainingCols == 0)
-                    {
-                        reachedCol = true;
-                    }
+                if (remainingCols == 0)
+                {
+                    reachedCol = true;
+                }
+                if (remainingRows == 0)
+                {
+                    reachedRow = true;
                 }
 
                 if (reachedRow && reachedCol)
@@ -67,7 +66,7 @@
 
                 var currentFigure = board.GetBoard[destinationRow + remainingRows, destinationCol + remainingCols];
 
-                if (currentFigure != null)
+                if (currentFigure != null && (!reachedCol || !reachedRow))
                 {
                     throw new InvalidOperationException("You cannot step onto a figure");
                 }

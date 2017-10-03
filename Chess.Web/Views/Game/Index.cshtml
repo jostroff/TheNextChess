@@ -9,7 +9,7 @@
 }
 
 <div id="online-users-wrapper">
-    <h2>Online users:</h2>
+    <h2 id="online-users-title">Online users:</h2>
     <ul id="online-users">
 
     </ul>
@@ -18,18 +18,18 @@
 <div id="invit_wrapper" style="display: none">
     <h2 id="invitation"></h2>
 </div>
-<div id="message-box" style="display: none">
-    <input id="text" type="text" />
-    <button>Send Message</button>
-    <div id="messages-wrapper">
-        <ul id="messages"></ul>
-    </div>
-</div>
+
 <div id="chessboard">
     <table id="board"></table>
 </div>
 
-
+<div id="message-box" style="display: none">
+    <input id="text" type="text" />
+    <button id="send-message">Send Message</button>
+    <div id="messages-wrapper">
+        <ul id="messages"></ul>
+    </div>
+</div>
 <script>
 
 
@@ -67,7 +67,7 @@
             for (let user of users) {
                 let listItem = $('<li>');
                 let username = $('<p>').addClass('online-user').text(user);
-                let inviteButton = $('<button>').text('Invite').on('click', function () {
+                let inviteButton = $('<button>').attr('id', 'invite-button').text('Invite').on('click', function () {
                     game.server.invite(user);
                 });
 

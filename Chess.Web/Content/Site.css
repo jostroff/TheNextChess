@@ -6,6 +6,7 @@ body {
     font-family: Lato, sans-serif;
     display: flex;
     justify-content: center;
+    background: url("../Content/Images/chess-backgr.jpg")
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -33,15 +34,46 @@ table {
 }
 
 td {
-    width: 5vw;
-    height: 5vw;
+    width: 4.5vw;
+    height: 4.5vw;
     display: inline-block;
     text-align: center;
-    line-height: 65px;
+    line-height: 4.5vw;
 }
 
 img {
     width: 100%;
+    vertical-align: top;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul#messages {
+    text-align: left;
+}
+
+button#invite-button {
+    width: 25%;
+    padding: 5px;
+    border-radius: 23px;
+    border-style: none;
+    background-color: greenyellow;
+    margin: 7px;
+    color: black;
+    font-size: 11px;
+    float: right;
+    margin: 0;
+} 
+
+ul#messages li {
+    color: gainsboro;
+    background-color: darkolivegreen;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 5px;
 }
 
 li {
@@ -49,43 +81,70 @@ li {
 }
 
 .online-user {
-    margin: 5px;
-    padding: 5px;
+    margin: 0px;
     background-color: cadetblue;
-    border-radius: 2px;
+    border-radius: 5px;
     display: inline-block;
+    width: 70%;
+    padding: 4px;
+}
+
+#online-users-title {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 3vw;
+}
+
+#online-users-wrapper {
+    padding: 5px;
+    width: 20%;
+    background-color: orange;
+    opacity: 0.9;
 }
 
 #chessboard {
     border-radius: 5px;
+    width: 60%;
+    background-color: greenyellow;
 }
 
-#inputs input{
-    width:15px;
+#message-box {
+    width: 20%;
+    background-color: deeppink;
+    padding: 5px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+input#text {
+    height: 30px;
+    width: 90%;
     margin: 5px;
-    display: inline-block;
+}
+
+button#send-message {
+    width: 90%;
+    padding: 5px;
+    border-radius: 23px;
+    border-style: none;
+    background-color: greenyellow;
+    margin: 7px;
+    color: darkorchid;
+    font-size: 2vw;
 }
 
 footer {
     width: 100%;
+    text-align: center;
+    color: wheat;
 }
 
 .my-container {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin-top: 100px;
+    width: 95%;
+    margin-top: 60px;
     display: flex;
     flex-wrap: wrap;
-}
 
-#message-box {
-    display: flex;
-    flex-wrap: wrap;
-    width: 20%;
-    max-height: 100px;
-}
-
-#chessboard {
-    width: 67%;
 }

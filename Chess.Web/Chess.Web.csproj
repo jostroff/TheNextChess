@@ -222,6 +222,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Bishop-black.png" />
     <Content Include="Content\Images\Bishop-white.png" />
+    <Content Include="Content\Images\chess-backgr.jpg" />
     <Content Include="Content\Images\King-black.png" />
     <Content Include="Content\Images\King-white.png" />
     <Content Include="Content\Images\Knight-black.png" />
