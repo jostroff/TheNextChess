@@ -17,6 +17,8 @@
 
 <div id="invit_wrapper" style="display: none">
     <h2 id="invitation"></h2>
+    <button id="confirm-btn">Confirm</button>
+    <button id="cancel-btn">Cancel</button>
 </div>
 
 <div id="chessboard">
@@ -50,7 +52,7 @@
             let oponentId = sessionStorage.getItem('oponentId');
             game.server.sendMessageToOponent(message.val(), oponentId);
             let listItem = $('<li>').text(`Me: ${message.val()}`);
-            $('#messages').append(listItem);
+            $('#messages').prepend(listItem);
             message.val('');
 
         }
@@ -58,7 +60,7 @@
         function recieveMessage(message, sender) {
             let myUsername = sessionStorage.getItem('username');
             let listItem = $('<li>').text(`${sender}: ${message}`);
-            $('#messages').append(listItem);
+            $('#messages').prepend(listItem);
         }
 
         function listUsers(users) {
@@ -82,13 +84,16 @@
 
         function recieveInvitation(host) {
             let invitation = $('#invitation').attr('data-conn-id', host.ConnectionId).text(`Invitation from ${host.Username}`);
-
-            let button = $('<button>').text('Confirm').on('click', function () {
+            let wrapper = $('#invit_wrapper');
+            $('#confirm-btn').on('click', function () {
                 sendConfirmation(invitation.attr('data-conn-id'));
             });
 
-            $('#invit_wrapper').append(button);
-            $('#invit_wrapper').show();
+            $('#cancel-btn').on('click', function () {
+                wrapper.hide();
+            });
+
+            wrapper.show();
 
         }
 
@@ -219,14 +224,14 @@
 
                         if (j % 2 == 0) {
                             if (i % 2 == 0) {
-                                td.css('background-color', '#F1F1F1');
+                                td.css('background-color', 'rgb(234, 217, 133)');
                             } else {
                                 td.css('background-color', 'brown');
                             }
                         }
                         else {
                             if (i % 2 != 0) {
-                                td.css('background-color', '#F1F1F1');
+                                td.css('background-color', 'rgb(234, 217, 133)');
                             } else {
                                 td.css('background-color', 'brown');
                             }
