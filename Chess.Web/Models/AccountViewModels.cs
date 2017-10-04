@@ -6,7 +6,7 @@ namespace Chess.Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Username")]
         public string Email { get; set; }
     }
 
@@ -50,7 +50,7 @@ namespace Chess.Web.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
+       // [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -65,7 +65,7 @@ namespace Chess.Web.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
