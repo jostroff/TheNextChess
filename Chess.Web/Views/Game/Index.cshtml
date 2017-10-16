@@ -37,6 +37,7 @@
 
 
     $(function () {
+        sessionStorage.setItem("username", "@User.Identity.Name");
 
         $.connection.hub.start();
 
