@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Chess.Web.Controllers
 {
+    [Authorize]
     public class GameController : Controller
     {
         // GET: Game

@@ -20,3 +20,9 @@ else
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
+
+<script>
+    (() => {
+        sessionStorage.setItem("username", "@User.Identity.GetUserName()");
+    })
+</script>
